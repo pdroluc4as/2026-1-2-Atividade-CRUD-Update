@@ -39,7 +39,7 @@ export default function Home() {
   return (
     <div>
       <h1>Listagem de Produtos</h1>
-      <ol className="flex flex-wrap">
+      <ol className="flex flex-wrap gap-5">
         {produtos.map(p => (
           <CardProduto key={p.id} produto={p} />
         ))}
