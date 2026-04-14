@@ -47,35 +47,70 @@ export default function PaginaEditar(){
     if (carregando) return <p>A carregar dados do produto...</p>;
     return (
         <>
-            <div className='mx-auto my-0'>
-                <h1>Pagina de Editar Produto</h1>
-                    <form onSubmit={Salvar}>
-                    <h1>Editar Produto #{params.id}</h1><br></br>
+            <div className="max-w-2xl mx-auto mt-10 p-8 bg-white rounded-xl shadow-md border border-gray-200">
+    {/* Cabeçalho do Formulário */}
+    <div className="mb-8 text-center">
+        <h1 className="text-3xl font-bold text-gray-800">Editar Produto</h1>
+        <p className="text-gray-500 mt-2">Atualizando dados do produto #{params.id}</p>
+    </div>
 
-                    <div className="flex flex-col">
-                        <label for="name">Nome do Produto:</label>
-                        <input
-                            id='name' 
-                            type="text" 
-                            value={title} 
-                            onChange={(e) => setTitle(e.target.value)}
-                            className='bg-gray-100'
-                        />
-                    </div>
-                    <br></br>
-                    <div className='flex flex-col'>
-                        <label for="description">Descrição produto:</label>
-                        <textarea id="description" className="border-2"  value={description} onChange={(e) => setDescription(e.target.value)} rows={10}></textarea><br></br>
-                    </div>
+    <form onSubmit={Salvar} className="flex flex-col gap-6">
+        
+        {/* Campo: Nome do Produto */}
+        <div className="flex flex-col gap-2">
+            <label htmlFor="name" className="text-sm font-semibold text-gray-700">
+                Nome do Produto
+            </label>
+            <input
+                id="name" 
+                type="text" 
+                value={title} 
+                onChange={(e) => setTitle(e.target.value)}
+                className="p-3 bg-gray-50 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition-all"
+                placeholder="Ex: Teclado Mecânico"
+            />
+        </div>
 
-                    <div>
-                        <label for="price">Preço:</label>
-                        <input id="price" type='number' value={price} onChange={(e) => setPrice(Number(e.target.value))} className='bg-gray-100'></input><br></br>
-                    </div>
-                    
-                    <button className="mt-3 bd-5 cursor-pointer" type="submit">Salvar Alterações</button>
-                </form>
-            </div>
+        {/* Campo: Descrição */}
+        <div className="flex flex-col gap-2">
+            <label htmlFor="description" className="text-sm font-semibold text-gray-700">
+                Descrição do produto
+            </label>
+            <textarea 
+                id="description" 
+                value={description} 
+                onChange={(e) => setDescription(e.target.value)} 
+                rows={5}
+                className="p-3 bg-gray-50 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition-all resize-y"
+                placeholder="Detalhes do produto..."
+            ></textarea>
+        </div>
+
+        {/* Campo: Preço */}
+        <div className="flex flex-col gap-2">
+            <label htmlFor="price" className="text-sm font-semibold text-gray-700">
+                Preço (R$)
+            </label>
+            <input 
+                id="price" 
+                type="number" 
+                value={price} 
+                onChange={(e) => setPrice(Number(e.target.value))} 
+                className="p-3 bg-gray-50 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition-all"
+                placeholder="0.00"
+            />
+        </div>
+        
+        {/* Botão de Salvar */}
+        <button 
+            type="submit"
+            className="mt-4 w-full bg-blue-600 hover:bg-blue-700 text-white font-bold py-3 px-4 rounded-lg transition-colors shadow-sm focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2 cursor-pointer"
+        >
+            Salvar Alterações
+        </button>
+
+    </form>
+</div>
         </>
     )
 }
