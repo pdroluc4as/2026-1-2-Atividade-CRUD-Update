@@ -1,6 +1,7 @@
 'use client';
 
 import { useEffect, useState } from "react";
+import { useRouter } from 'next/navigation';
 import { getProdutosTodos } from "@/services/api"
 
 import { Badge } from "@/components/ui/badge"
@@ -29,7 +30,7 @@ export default function Home() {
   useEffect(() => {
     const carregar = async() => {
       const resultado = await getProdutosTodos();
-      console.log(resultado.data.products);
+      // console.log(resultado.data.products);
       setProdutos(resultado.data.products);
     }
     carregar();
@@ -52,6 +53,13 @@ interface CardProdutoProp {
 }
 
 function CardProduto({produto}:CardProdutoProp) {
+  const router = useRouter();
+
+  const irParaEditar = () => {
+    // Redireciona para /editar/ID_DO_PRODUTO
+    router.push(`/editar/${produto.id}`);
+  };
+
     return (
         <Card className="relative mx-auto w-full max-w-sm pt-0">
       <div className="absolute inset-0 z-30 aspect-video bg-black/35" />
@@ -62,7 +70,7 @@ function CardProduto({produto}:CardProdutoProp) {
       />
       <CardHeader>
         <CardAction>
-          <Badge variant="secondary">Featured</Badge>
+          <Badge className="bg-green-400" variant="secondary">Em Estoque</Badge>
         </CardAction>
         <CardTitle>{produto.title}</CardTitle>
         <CardDescription>
@@ -70,8 +78,8 @@ function CardProduto({produto}:CardProdutoProp) {
         </CardDescription>
       </CardHeader>
       <CardFooter className="flex justify-around">
-        <Button className="w-15">{produto.price}</Button>
-        <span>Editar</span>
+        <Button className="w-15">${produto.price}</Button>
+        <button className="w-15 cursor-pointer" onClick={irParaEditar}>Editar</button>
       </CardFooter>
       
     </Card>
